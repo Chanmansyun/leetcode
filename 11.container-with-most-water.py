@@ -7,14 +7,15 @@
 # @lc code=start
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        start_idx = height.index(height.max())
-        end_idx = len(height)
-        result = (end_idx-start_idx) * min(height[start_idx], height[-1])
-        for i, j in enumerate(height):
-            if i < start_idx:
-                ...
-            elif i > start_idx:
-                ...
+        # [1,2,4,3]
+        l_step, r_step = 0, len(height)-1
+        result = (r_step-l_step) * min(height[0], height[-1])
+        while l_step < r_step:
+                result = max(result, (r_step-l_step) * min(height[l_step], height[r_step]))
+                if height[l_step] > height[r_step]:
+                    r_step -= 1
+                elif height[l_step] <= height[r_step]:
+                    l_step += 1
         return result
 # @lc code=end
 
